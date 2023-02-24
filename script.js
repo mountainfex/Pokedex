@@ -4,40 +4,44 @@ function init(){
     loadPokemon();
 }
 
-
 async function loadPokemon(){
-    for (let i = 1; i < 2; i++) {
+    
+    for (let i = 1; i < 21; i++) {
         let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
         let response = await fetch(url);
         let currentPokemon = await response.json();
+        let fightclasstype = currentPokemon.types[0].type.name;
         allPokemon.push(currentPokemon);
-        document.getElementById("cardcontent").innerHTML += generateCard(currentPokemon, i);
-        getType(currentPokemon);
+        document.getElementById("cardcontent").innerHTML += generateCard(fightclasstype, currentPokemon, i);
+        getType(currentPokemon,i);
     }
+    
 }
 
-function generateCard(currentPokemon, i){
+function generateCard(fightclasstype, currentPokemon,i){
     return `
-    <div class="pokemonCard">
+    <div class="pokemonCard ${fightclasstype}">
         <div class="pokemonCardHeader">
           <div class="pokemonName">${currentPokemon.name}</div>
           <div class="pokemonNumber"># ${currentPokemon.id}</div>
         </div>
         <div class="pokemonCardContent">
-          <div class="pokemonClass" id="pokemonClass">
+          <div class="pokemonClass" id="pokemonClass${i}">
 
           </div>
-          <img src="${currentPokemon.sprites.other.dream_world.front_default}" alt="BISASAM" />
+          <img class="pokemonIMG"src="${currentPokemon.sprites.other.dream_world.front_default}" alt="" />
         </div>
       </div>
     `;
 }
 
-function getType(currentPokemon){
+function getType(currentPokemon,i){
     for (let j = 0; j < currentPokemon.types.length; j++) {
-        document.getElementById("pokemonClass").innerHTML += `
+        let pokemonClassID = document.getElementById(`pokemonClass${i}`);
+        pokemonClassID.innerHTML+=`
         <div class="fightClass">${currentPokemon.types[j].type.name}</div>
         `;
         
     }
 }
+

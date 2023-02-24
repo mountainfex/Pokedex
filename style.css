@@ -6,6 +6,42 @@ body {
   h1 {
     margin: 0;
   }
+
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-button:start:decrement,
+  ::-webkit-scrollbar-button:end:increment {
+    height: 10px;
+    background-color: transparent;
+  }
+  ::-webkit-scrollbar-track-piece {
+    background-color: #eeeeee;
+    -webkit-border-radius: 25px;
+  }
+  ::-webkit-scrollbar-thumb:vertical {
+    height: 10px;
+    background-color: rgb(177, 177, 177);
+    border: 1px solid #eee;
+    -webkit-border-radius: 25px;
+  }
+  
+  .contain::-webkit-scrollbar {
+    width: 0px;
+  }
+  
+  .contain:hover::-webkit-scrollbar {
+    background: #f1f1f1;
+    width: 5px;
+    height: 10%;
+    border-radius: 25px;
+  }
+  
+  .contain:hover::-webkit-scrollbar-thumb {
+    background: rgb(177, 177, 177);
+    border-radius: 25px;
+  }
   
   .form-control {
     display: block;
@@ -56,7 +92,11 @@ body {
   
   .pokedexBackground {
     background-color: rgba(27, 31, 34, 1);
-    height: 100vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding: 30px;
   }
   .pokemonCard {
     background-color: #e18d2f;
@@ -113,3 +153,74 @@ body {
     background-color: rgba(0, 0, 0, 0.125);
   }
 
+  .grass {
+background-color:#56C182 ;    
+  }
+
+  .fire {
+background-color:#FB6C6C ;
+  }
+
+  .water {
+background-color: #32B3E2;
+  }
+
+  .bug {
+background-color: #AFCF7B;
+  }
+
+  .normal {
+background-color:#DAAC4B ;
+  }
+
+.electric{
+  background-color:#F9E75B ;
+}
+
+.ice{
+  background-color:#2ea399 ;
+}
+
+.fighting{
+  background-color: #ACA6A6;
+}
+
+.posion{
+  background-color: #a561a5;
+}
+  
+.ground{
+  background-color: #F9E75B;
+}
+
+.flying{
+  background-color:#cdecff ;
+}
+
+.psychic{
+background-color: #DAAC4B;
+}
+
+.rock{
+  background-color: #777373;
+}
+
+.ghost{
+  background-color:#151414;
+}
+
+.dragon{
+  background-color: #FFA07A;
+}
+
+.dark{
+  background-color: #242222;
+}
+
+.steel{
+  background-color: #777373;
+}
+
+.fairy{
+  background-color:#F6B6BC ;
+}
