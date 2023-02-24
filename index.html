@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="style.css" />
     <title>Pokedex</title>
   </head>
-  <body>
+  <body onload="init()">
     <nav class="navbar bg-body-tertiary bg-dark">
       <div class="container-fluid">
         <a class="navbar-brand"><img src="img/pokedex_logo.png" alt="" /></a>
@@ -28,20 +28,8 @@
         </form>
       </div>
     </nav>
-    <section class="pokedexBackground">
-      <div class="pokemonCard">
-        <div class="pokemonCardHeader">
-          <div class="pokemonName">pokemonName</div>
-          <div class="pokemonNumber">#1</div>
-        </div>
-        <div class="pokemonCardContent">
-          <div class="pokemonClass">
-            <div class="fightClass">grass</div>
-            <div class="fightClass">poison</div>
-          </div>
-          <img src="" alt="BISASAM" />
-        </div>
-      </div>
+    <section class="pokedexBackground" id="cardcontent">
+      
     </section>
   </body>
 </html>

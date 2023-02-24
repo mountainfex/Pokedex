@@ -100,6 +100,9 @@ body {
   
   .pokemonCardContent img {
     margin-right: 10px;
+    max-height: 130px;
+    max-width: 135px;
+    margin-right: 26px;
   }
   
   .fightClass {
@@ -109,4 +112,4 @@ body {
     border-radius: 10px;
     background-color: rgba(0, 0, 0, 0.125);
   }
-  
+
