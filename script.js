@@ -4,6 +4,8 @@ function init(){
     loadPokemon();
 }
 
+
+
 async function loadPokemon(){
     
     for (let i = 1; i < 21; i++) {
@@ -12,7 +14,7 @@ async function loadPokemon(){
         let currentPokemon = await response.json();
         let fightclasstype = currentPokemon.types[0].type.name;
         allPokemon.push(currentPokemon);
-        document.getElementById("cardcontent").innerHTML += generateCard(fightclasstype, currentPokemon, i);
+        document.getElementById("cardContent").innerHTML += generateCard(fightclasstype, currentPokemon, i);
         getType(currentPokemon,i);
     }
     
@@ -20,7 +22,7 @@ async function loadPokemon(){
 
 function generateCard(fightclasstype, currentPokemon,i){
     return `
-    <div class="pokemonCard ${fightclasstype}">
+    <div class="pokemonCard ${fightclasstype}" onclick="openPokeCard()">
         <div class="pokemonCardHeader">
           <div class="pokemonName">${currentPokemon.name}</div>
           <div class="pokemonNumber"># ${currentPokemon.id}</div>
@@ -40,8 +42,15 @@ function getType(currentPokemon,i){
         let pokemonClassID = document.getElementById(`pokemonClass${i}`);
         pokemonClassID.innerHTML+=`
         <div class="fightClass">${currentPokemon.types[j].type.name}</div>
-        `;
-        
+        `;        
     }
 }
+function openPokeCard(){
+    document.getElementById("popUpContainer").classList.remove('dnone');
+}
+
+function closePokeCard(){
+    document.getElementById("popUpContainer").classList.add('dnone');
+}
+
 

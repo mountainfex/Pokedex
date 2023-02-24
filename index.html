@@ -28,10 +28,31 @@
         </form>
       </div>
     </nav>
-    <section class="pokedexBackground" id="cardcontent">
+    <section class="pokedexBackground" id="cardContent">
       
     </section>
 
-    <div id="fightingclasstest"></div>
+    <section class="popUpContainer dnone" id="popUpContainer" onclick="closePokeCard()" >
+      <div class="openPokeCard">
+
+      <div class="openPokeCardTop">
+        <div class="openPokemonCardHeader">
+          <div class="openPokemonName">POKEMON NAME</div>
+          <div class="openPokemonNumber">#1</div>
+        </div>
+          <div class="openPokemonClass" id="pokemonClass${i}">
+            <div class="openFightClass">grass</div>
+            <div class="openFightClass">poison</div>
+          </div>
+          <div class="openPokemonCardIMG">
+            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="">
+          </div>
+          
+      </div>
+      <div class="openPokeCardBottom">
+
+      </div>
+    </div>
+    </section>
   </body>
 </html>
