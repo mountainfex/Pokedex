@@ -110,6 +110,10 @@ body {
     background-repeat: no-repeat;
     background-position: 50%;
   }
+
+  .pokemonCard:hover {
+    cursor: pointer;
+  }
   
   .pokemonCardHeader {
     display: flex;
@@ -143,6 +147,11 @@ body {
     max-height: 130px;
     max-width: 135px;
     margin-right: 26px;
+  }
+
+  .pokemonCard:hover img {
+    transform: scale(1.1);
+    transition: 0.1s;
   }
   
   .fightClass {
