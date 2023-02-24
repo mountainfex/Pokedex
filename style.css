@@ -128,11 +128,17 @@ body {
   }
   
   .pokemonName {
+    font-weight: bold;
     font-size: 28px;
     margin: 10px 0 10px 0;
   }
+
+  .pokemonName:first-letter {
+    text-transform: uppercase;
+}
   
   .pokemonNumber {
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;
