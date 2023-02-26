@@ -1,28 +1,28 @@
 let allPokemon = [];
 
-function init(){
-    loadPokemon();
+function init() {
+  loadPokemon();
 }
 
-
-
-async function loadPokemon(){
-    
-    for (let i = 1; i < 21; i++) {
-        let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
-        let response = await fetch(url);
-        let currentPokemon = await response.json();
-        let fightclasstype = currentPokemon.types[0].type.name;
-        allPokemon.push(currentPokemon);
-        document.getElementById("cardContent").innerHTML += generateCard(fightclasstype, currentPokemon, i);
-        getType(currentPokemon,i);
-    }
-    
+async function loadPokemon() {
+  for (let i = 1; i < 21; i++) {
+    let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
+    let response = await fetch(url);
+    let currentPokemon = await response.json();
+    let fightclasstype = currentPokemon.types[0].type.name;
+    allPokemon.push(currentPokemon);
+    document.getElementById("cardContent").innerHTML += generateCard(
+      fightclasstype,
+      currentPokemon,
+      i
+    );
+    getType(currentPokemon, i, `pokemonClass${i}`);
+  }
 }
 
-function generateCard(fightclasstype, currentPokemon,i){
-    return `
-    <div class="pokemonCard ${fightclasstype}" onclick="openPokeCard()">
+function generateCard(fightclasstype, currentPokemon, i) {
+  return `
+    <div class="pokemonCard ${fightclasstype}" onclick="openPokeCard(${i})">
         <div class="pokemonCardHeader">
           <div class="pokemonName">${currentPokemon.name}</div>
           <div class="pokemonNumber"># ${currentPokemon.id}</div>
@@ -37,20 +37,74 @@ function generateCard(fightclasstype, currentPokemon,i){
     `;
 }
 
-function getType(currentPokemon,i){
-    for (let j = 0; j < currentPokemon.types.length; j++) {
-        let pokemonClassID = document.getElementById(`pokemonClass${i}`);
-        pokemonClassID.innerHTML+=`
+function getType(currentPokemon, i, ID) {
+  for (let j = 0; j < currentPokemon.types.length; j++) {
+    let pokemonClassID = document.getElementById(ID);
+    pokemonClassID.innerHTML += `
         <div class="fightClass">${currentPokemon.types[j].type.name}</div>
-        `;        
-    }
+        `;
+  }
 }
-function openPokeCard(){
-    document.getElementById("popUpContainer").classList.remove('dnone');
+function openPokeCard(i) {
+  document.getElementById("popUpContainer").classList.remove("dnone");
+  let pokecard = document.getElementById("openPokeCard");
+  let bigPokemon = allPokemon[i - 1];
+  let fightclasstype = bigPokemon.types[0].type.name;
+  pokecard.innerHTML = generatePokecard(bigPokemon, fightclasstype);
+  getType(bigPokemon, i, "pokemonCardClass");
 }
 
-function closePokeCard(){
-    document.getElementById("popUpContainer").classList.add('dnone');
+function closePokeCard() {
+  document.getElementById("popUpContainer").classList.add("dnone");
 }
 
+function generatePokecard(bigPokemon, fightclasstype) {
+  return `
+    <div class="openPokeCardTop ${fightclasstype}">
+    <div class="openPokemonCardHeader">
+      <div class="openPokemonName">${bigPokemon.name}</div>
+      <div class="openPokemonNumber"># ${bigPokemon.id}</div>
+    </div>
+    <div class="openPokemonClass" id="pokemonCardClass">
 
+    </div>
+    <div class="openPokemonCardIMG">
+      <img src="${bigPokemon.sprites.other.dream_world.front_default}" alt=""/>
+    </div>
+  </div>
+
+  <div class="openPokeCardBottom">
+    <div class="categoryHeader">
+      <p>About</p>
+      <p>Base Stats</p>
+      <p>Moves</p>
+    </div>
+    <div class="categories">
+      <div class="categoryAbout">
+        <div class="attribute">
+          <p>Height:</p>
+          <p>0,7 m</p>
+        </div>
+        <hr class="line" />
+        <div class="attribute">
+          <p>Weight:</p>
+          <p>6,9 kg</p>
+        </div>
+        <hr class="line" />
+        <div class="attribute">
+          <p>Abilities:</p>
+          <p>overgrow, chlorophyll</p>
+        </div>
+        <hr class="line" />
+        <div class="attribute">
+          <p>Base Experience</p>
+          <p>64</p>
+        </div>
+        <hr class="line" />
+      </div>
+      <div class="categoryStats"></div>
+      <div class="categoryMoves"></div>
+    </div>
+  </div>
+     `;
+}
