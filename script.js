@@ -45,6 +45,9 @@ function getType(currentPokemon, i, ID) {
         `;
   }
 }
+
+// Rendering the popUpCart
+
 function openPokeCard(i) {
   document.getElementById("popUpContainer").classList.remove("dnone");
   let pokecard = document.getElementById("openPokeCard");
@@ -52,10 +55,37 @@ function openPokeCard(i) {
   let fightclasstype = bigPokemon.types[0].type.name;
   pokecard.innerHTML = generatePokecard(bigPokemon, fightclasstype);
   getType(bigPokemon, i, "pokemonCardClass");
+  renderAbilities(bigPokemon);
+}
+
+function renderAbilities(bigPokemon) {
+  let abilities = document.getElementById("abilities");
+  abilities.innerHTML = "";
+  for (let l = 0; l < bigPokemon.abilities.length; l++) {
+    let newAbility = bigPokemon.abilities[l];
+
+    if (l < bigPokemon["abilities"].length - 1) {
+      abilities.innerHTML += createAbilities(newAbility);
+    } else {
+      abilities.innerHTML += createAbilitiesWithoutComma(newAbility);
+    }
+  }
+}
+
+function createAbilities(newAbility) {
+  return `${newAbility.ability.name}, `;
+}
+
+function createAbilitiesWithoutComma(newAbility) {
+  return `${newAbility.ability.name}`;
 }
 
 function closePokeCard() {
   document.getElementById("popUpContainer").classList.add("dnone");
+}
+
+function doNotClose(event) {
+  event.stopPropagation();
 }
 
 function generatePokecard(bigPokemon, fightclasstype) {
@@ -83,22 +113,22 @@ function generatePokecard(bigPokemon, fightclasstype) {
       <div class="categoryAbout">
         <div class="attribute">
           <p>Height:</p>
-          <p>0,7 m</p>
+          <p>${(bigPokemon.height / 10).toFixed(1).replaceAll(".", ",")} m</p>
         </div>
         <hr class="line" />
         <div class="attribute">
           <p>Weight:</p>
-          <p>6,9 kg</p>
+          <p>${(bigPokemon.weight / 10).toFixed(1).replaceAll(".", ",")} kg</p>
         </div>
         <hr class="line" />
         <div class="attribute">
           <p>Abilities:</p>
-          <p>overgrow, chlorophyll</p>
+          <p id=abilities></p>
         </div>
         <hr class="line" />
         <div class="attribute">
           <p>Base Experience</p>
-          <p>64</p>
+          <p>${bigPokemon.base_experience}</p>
         </div>
         <hr class="line" />
       </div>

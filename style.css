@@ -194,6 +194,10 @@ h1 {
   background-color: #56c182;
   border-radius: 25px 25px 0 0;
   padding: 30px 20px 0 20px;
+  background-image: url(img/ball.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 50%;
 }
 
 .openPokemonCardHeader {
@@ -204,6 +208,10 @@ h1 {
 .openPokemonName {
   font-size: 28px;
   font-weight: bold;
+}
+
+.openPokemonName:first-letter {
+  text-transform: uppercase;
 }
 
 .openPokemonNumber {
@@ -237,7 +245,8 @@ h1 {
 }
 
 .openPokemonCardIMG img {
-  height: 250px;
+  min-height: 210px;
+  max-height: 250px;
   width: auto;
 }
 
