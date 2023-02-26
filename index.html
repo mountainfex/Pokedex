@@ -28,31 +28,65 @@
         </form>
       </div>
     </nav>
-    <section class="pokedexBackground" id="cardContent">
-      
-    </section>
+    <section class="pokedexBackground" id="cardContent"></section>
 
-    <section class="popUpContainer dnone" id="popUpContainer" onclick="closePokeCard()" >
+    <section
+      class="popUpContainer dnone"
+      id="popUpContainer"
+      onclick="closePokeCard()"
+    >
       <div class="openPokeCard">
-
-      <div class="openPokeCardTop">
-        <div class="openPokemonCardHeader">
-          <div class="openPokemonName">POKEMON NAME</div>
-          <div class="openPokemonNumber">#1</div>
-        </div>
+        <div class="openPokeCardTop">
+          <div class="openPokemonCardHeader">
+            <div class="openPokemonName">POKEMON NAME</div>
+            <div class="openPokemonNumber">#1</div>
+          </div>
           <div class="openPokemonClass" id="pokemonClass${i}">
             <div class="openFightClass">grass</div>
             <div class="openFightClass">poison</div>
           </div>
           <div class="openPokemonCardIMG">
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg" alt="">
+            <img
+              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
+              alt=""
+            />
           </div>
-          
-      </div>
-      <div class="openPokeCardBottom">
+        </div>
 
+        <div class="openPokeCardBottom">
+          <div class="categoryHeader">
+            <p>About</p>
+            <p>Base Stats</p>
+            <p>Moves</p>
+          </div>
+          <div class="categories">
+            <div class="categoryAbout">
+              <div class="attribute">
+                <p>Height:</p>
+                <p>0,7 m</p>
+              </div>
+              <hr class="line" />
+              <div class="attribute">
+                <p>Weight:</p>
+                <p>6,9 kg</p>
+              </div>
+              <hr class="line" />
+              <div class="attribute">
+                <p>Abilities:</p>
+                <p>overgrow, chlorophyll</p>
+              </div>
+              <hr class="line" />
+              <div class="attribute">
+                <p>Base Experience</p>
+                <p>64</p>
+              </div>
+              <hr class="line" />
+            </div>
+            <div class="categoryStats"></div>
+            <div class="categoryMoves"></div>
+          </div>
+        </div>
       </div>
-    </div>
     </section>
   </body>
 </html>
