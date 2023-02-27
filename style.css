@@ -258,14 +258,20 @@ h1 {
 }
 
 .categoryHeader {
-  color: #151414;
-  font-weight: bold;
+  color: #a8a8a8;
+  font-weight: 700;
   display: flex;
   justify-content: space-evenly;
 }
 
 .categoryHeader p {
   margin-top: 35px;
+  /* border-bottom: solid 2px #000000; */
+}
+
+.categoryHeader P:hover {
+  cursor: pointer;
+  color: #000000;
 }
 
 .categories {
@@ -292,6 +298,34 @@ h1 {
   height: 0.2px;
   margin: 16px 0 16px 0 !important;
 }
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--bs-progress-bar-color);
+  text-align: center;
+  white-space: nowrap;
+  background-color: #41b672;
+  transition: var(--bs-progress-bar-transition);
+}
+
+.bg-purple {
+  background-color: darkslateblue !important;
+}
+
+
+
+
+
+
 
 .grass {
   background-color: #56c182;
