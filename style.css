@@ -235,19 +235,41 @@ h1 {
 }
 
 .openPokemonCardIMG {
-  margin-left: 20px;
-  margin-top: 20px;
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
-.openPokemonCardIMG img {
+.pokemonimg {
   min-height: 210px;
-  max-height: 250px;
+  max-height: 210px;
   width: auto;
+}
+
+.arrowleft {
+  position: fixed;
+  top: 30%;
+  left: 25%;
+  width: 30px;
+}
+
+.arrowleft:hover {
+  transform: scale(1.1);
+  transition: 0.1s
+}
+
+.arrowright {
+  position: fixed;
+  top: 30%;
+  right: 25%;
+  width: 30px;
+}
+
+.arrowright:hover {
+  transform: scale(1.1);
+  transition: 0.1s
 }
 
 .openPokeCardBottom {
@@ -326,8 +348,29 @@ h1 {
   color: #000000;
 }
 
+.move-div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 0 20px 10px 20px;
+  width: 400px;
+}
 
+.move-div p {
+margin: 0;
+}
 
+.move {
+  flex: 1;
+  white-space: nowrap;
+  text-align: center;
+  color:#fff;
+  background-color: #adadad;
+  border-radius: 5px;
+  padding: 2px 5px;
+}
 
 
 

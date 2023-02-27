@@ -1,11 +1,12 @@
 let allPokemon = [];
+let stats = []
 
 function init() {
   loadPokemon();
 }
 
 async function loadPokemon() {
-  for (let i = 1; i < 3; i++) {
+  for (let i = 1; i < 21; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
     let currentPokemon = await response.json();
@@ -55,7 +56,7 @@ function openPokeCard(i) {
   let fightclasstype = bigPokemon.types[0].type.name;
   pokecard.innerHTML = generatePokecard(bigPokemon, fightclasstype, i);
   getType(bigPokemon, i, "pokemonCardClass");
-  prepareAboutCategory(i);
+  renderAboutCategory(i);
   renderAbilities(bigPokemon);
 }
 
@@ -100,25 +101,27 @@ function generatePokecard(bigPokemon, fightclasstype, i) {
 
     </div>
     <div class="openPokemonCardIMG">
-      <img src="${bigPokemon.sprites.other.dream_world.front_default}" alt=""/>
+      <img class="arrowleft" onclick="slide(${i-1})" src="img/arrow_back.svg" alt="">
+      <img class="pokemonimg" src="${bigPokemon.sprites.other.dream_world.front_default}" alt=""/>
+      <img class="arrowright" onclick="slide(${i+1})" src="img/arrow_forward.svg" alt="">
     </div>
   </div>
 
   <div class="openPokeCardBottom">
     <div class="categoryHeader">
-      <p onclick="prepareAboutCategory(${i})"class="category">About</p>
+      <p onclick="renderAboutCategory(${i})"class="category">About</p>
       <p onclick="renderBaseStats(${i})" class="category">Base Stats</p>
-      <p onclick="prepareMoves(${i})"class="category">Moves</p>
+      <p onclick="renderMoves(${i})"class="category">Moves</p>
     </div>
     <div class="categories" id="categories">
-
     </div>
   </div>
      `;
 }
 
 
-function prepareAboutCategory(i){
+function renderAboutCategory(i){
+  document.getElementById('categories').classList.remove('move-div');
   let currentPokemon = allPokemon[i-1];
   let categoryAbout = document.getElementById("categories");
   categoryAbout.innerHTML = ``;
@@ -152,35 +155,108 @@ function getAboutCategory(currentPokemon,i){
 }
 
 
+
 function renderBaseStats (i){ {
     let currentPokemon = allPokemon[i-1];
     let category = document.getElementById("categories");
     category.innerHTML = ``;
+    category.innerHTML = `<canvas id="myChart" width="400" height="400"></canvas>`;
+
+    let myChart = document.getElementById("myChart");
     for (let m = 0; m < currentPokemon.stats.length; m++) {
-      let newStat = currentPokemon.stats[m];
-      category.innerHTML += getBaseStats(newStat);
-      
+      let apiData = currentPokemon.stats[m].base_stat;
+      myChart.innerHTML = getBaseStats(apiData);
     }
-    
 }}
 
-function getBaseStats(newStat){
-  return `
-  <div class="stats">
-    <div class="progress" role="progressbar" aria-label="Example with label">
-      <div class="progress-bar bg-success progressbarcontent">${newStat.stat.name}</div>
-    </div>
-  </div>`;
+function getBaseStats(apiData){
+  const ctx = document.getElementById('myChart');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+    labels: [
+      'HP',
+      'Attack',
+      'Defense',
+      'Special Attack',
+      'Special Defense',
+      'Speed',
+    ],
+    datasets: [{
+      label: 'My First Dataset',
+      data: apiData,
+      backgroundColor: [
+        'rgb(86, 193, 130)',
+        'rgb(251, 108, 108)',
+        'rgb(227, 177, 58)',
+        'rgb(50, 179, 226)',
+        'rgb(175, 207, 123)',
+        'rgb(165, 97, 165)'
+      ],
+      hoverOffset: 4
+    }]
+  }
+})
+};
+
+function renderMoves(i){
+  document.getElementById('categories').classList.add('move-div');
+  let currentPokemon = allPokemon[i-1];
+  let movesCategory = document.getElementById("categories");
+  movesCategory.innerHTML = ``;
+
+  for (let n = 0; n < currentPokemon.moves.length; n++) {
+    let newMoves = currentPokemon.moves[n];
+
+    movesCategory.innerHTML += getMovesCategory(newMoves, n);
+  }
 }
+
+function getMovesCategory(newMoves, n){
+  return `
+  <p class="move" id="move">${newMoves.move.name}</p>`;
+}
+
+function slide(p){
+  let currentPokemon = allPokemon[p-1];
+  let fightclasstype = currentPokemon.types[0].type.name;
+  let slide = document.getElementById('openPokeCard');
+
+  if (p < 0){
+    p = currentPokemon.length -1;
+  }
+
+  if (p > currentPokemon.length-1){
+    p=0; 
+  }
+    slide.innerHTML = generatePokecard(currentPokemon,fightclasstype,p);
+    renderAboutCategory(p);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
-// function prepareMoves(i){
-//   let currentPokemon = allPokemon[i];
-//   let movesCategory = document.getElementById("categories");
-//   movesCategory.innerHTML = ``;
-//   movesCategory.innerHTML = getMovesCategory(currentPokemon, i);
-// }
-
-// function getMovesCategory(currentPokemon, i){
-//   return ``;
-// }
