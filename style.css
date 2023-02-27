@@ -275,6 +275,7 @@ h1 {
 }
 
 .categories {
+  color: black;
   margin-top: 20px;
   padding: 0 35px 0 35px;
 }
@@ -321,6 +322,9 @@ h1 {
   background-color: darkslateblue !important;
 }
 
+.progressbarcontent {
+  color: #000000;
+}
 
 
 

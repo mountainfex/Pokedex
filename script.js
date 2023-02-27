@@ -5,7 +5,7 @@ function init() {
 }
 
 async function loadPokemon() {
-  for (let i = 1; i < 21; i++) {
+  for (let i = 1; i < 3; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
     let currentPokemon = await response.json();
@@ -107,7 +107,7 @@ function generatePokecard(bigPokemon, fightclasstype, i) {
   <div class="openPokeCardBottom">
     <div class="categoryHeader">
       <p onclick="prepareAboutCategory(${i})"class="category">About</p>
-      <p onclick="prepareBaseStats(${i})" class="category">Base Stats</p>
+      <p onclick="renderBaseStats(${i})" class="category">Base Stats</p>
       <p onclick="prepareMoves(${i})"class="category">Moves</p>
     </div>
     <div class="categories" id="categories">
@@ -122,11 +122,11 @@ function prepareAboutCategory(i){
   let currentPokemon = allPokemon[i-1];
   let categoryAbout = document.getElementById("categories");
   categoryAbout.innerHTML = ``;
-  categoryAbout.innerHTML = renderAboutCategory(currentPokemon, i);
+  categoryAbout.innerHTML = getAboutCategory(currentPokemon, i);
   renderAbilities(currentPokemon);
 }
 
-function renderAboutCategory(currentPokemon,i){
+function getAboutCategory(currentPokemon,i){
   return `<div class="categoryAbout">
   <div class="attribute">
     <p>Height:</p>
@@ -152,50 +152,35 @@ function renderAboutCategory(currentPokemon,i){
 }
 
 
-function prepareBaseStats(i){
-  let currentPokemon = allPokemon[i];
-  let baseStatsCategory = document.getElementById("categories");
-  baseStatsCategory.innerHTML = ``;
-  baseStatsCategory.innerHTML = renderBaseStats(currentPokemon, i);
-}
+function renderBaseStats (i){ {
+    let currentPokemon = allPokemon[i-1];
+    let category = document.getElementById("categories");
+    category.innerHTML = ``;
+    for (let m = 0; m < currentPokemon.stats.length; m++) {
+      let newStat = currentPokemon.stats[m];
+      category.innerHTML += getBaseStats(newStat);
+      
+    }
+    
+}}
 
-function renderBaseStats(currentPokemon,i){
+function getBaseStats(newStat){
   return `
   <div class="stats">
-  <div class="progress" role="progressbar" aria-label="Example with label">
-  <div class="progress-bar bg-success" style="width: 25%">HP</div>
-  </div>
-
-  <div class="progress" role="progressbar">
-  <div class="progress-bar bg-danger" style="width: 50%">Attack</div>
-  </div>
-
-  <div class="progress" role="progressbar">
-  <div class="progress-bar bg-warning" style="width: 75%">Defense</div>
-  </div>
-
-  <div class="progress" role="progressbar">
-  <div class="progress-bar bg-info" style="width: 100%">Special-Attack</div>
-  </div>
-
-  <div class="progress" role="progressbar">
-  <div class="progress-bar" style="width: 100%">Special-Defense</div>
-  </div>
-  
-  <div class="progress" role="progressbar">
-  <div class="progress-bar bg-purple" style="width: 100%"> Speed</div>
-  </div>
+    <div class="progress" role="progressbar" aria-label="Example with label">
+      <div class="progress-bar bg-success progressbarcontent">${newStat.stat.name}</div>
+    </div>
   </div>`;
 }
   
 
-function prepareMoves(i){
-  let currentPokemon = allPokemon[i];
-  let movesCategory = document.getElementById("categories");
-  movesCategory.innerHTML = ``;
-  movesCategory.innerHTML = renderMoves(currentPokemon, i);
-}
+// function prepareMoves(i){
+//   let currentPokemon = allPokemon[i];
+//   let movesCategory = document.getElementById("categories");
+//   movesCategory.innerHTML = ``;
+//   movesCategory.innerHTML = getMovesCategory(currentPokemon, i);
+// }
 
-function renderrenderMoves(currentPokemon, i){
-  return ``;
-}
+// function getMovesCategory(currentPokemon, i){
+//   return ``;
+// }
