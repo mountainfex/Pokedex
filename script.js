@@ -1,5 +1,6 @@
 let allPokemon = [];
-let stats = []
+let data = [];
+let names = [];
 
 function init() {
   loadPokemon();
@@ -156,48 +157,43 @@ function getAboutCategory(currentPokemon,i){
 
 
 
-function renderBaseStats (i){ {
+async function renderBaseStats (i){ {
     let currentPokemon = allPokemon[i-1];
     let category = document.getElementById("categories");
     category.innerHTML = ``;
     category.innerHTML = `<canvas id="myChart" width="400" height="400"></canvas>`;
 
-    let myChart = document.getElementById("myChart");
-    for (let m = 0; m < currentPokemon.stats.length; m++) {
-      let apiData = currentPokemon.stats[m].base_stat;
-      myChart.innerHTML = getBaseStats(apiData);
-    }
-}}
 
-function getBaseStats(apiData){
-  const ctx = document.getElementById('myChart');
-  new Chart(ctx, {
+    names = [];
+    data = [];
+    for (let q = 0; q < currentPokemon.stats.length; q++) {
+      let name = currentPokemon.stats[q].stat.name;
+      let stats = currentPokemon.stats[q].base_stat;
+      names.push(name);
+      data.push(stats);
+    }
+
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
     type: 'doughnut',
     data: {
-    labels: [
-      'HP',
-      'Attack',
-      'Defense',
-      'Special Attack',
-      'Special Defense',
-      'Speed',
-    ],
+    labels: names,
     datasets: [{
-      label: 'My First Dataset',
-      data: apiData,
+      label: 'Basestats',
+      data: data,
       backgroundColor: [
         'rgb(86, 193, 130)',
         'rgb(251, 108, 108)',
         'rgb(227, 177, 58)',
         'rgb(50, 179, 226)',
         'rgb(175, 207, 123)',
-        'rgb(165, 97, 165)'
+        'rgb(165, 97, 165)',
       ],
       hoverOffset: 4
     }]
   }
 })
-};
+}}
 
 function renderMoves(i){
   document.getElementById('categories').classList.add('move-div');
