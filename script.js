@@ -1,6 +1,6 @@
 let allPokemon = [];
 let startID = 1;
-let endID = 20;
+let endID = 21;
 let data = [];
 let names = [];
 
@@ -101,12 +101,18 @@ function createAbilitiesWithoutComma(newAbility) {
 function generatePokecard(bigPokemon, fightclasstype, i) {
   return `
     <div class="openPokeCardTop ${fightclasstype}">
-    <div class="openPokemonCardHeader">
-      <div class="openPokemonName">${bigPokemon.name}</div>
-      <div class="openPokemonNumber"># ${bigPokemon.id}</div>
+      <div class="openPokemonCardHeader">
+        <div class="openPokemonHeadcontent">
+          <div class="openPokemonName">${bigPokemon.name}
+          </div>
+          <div class="openPokemonNumber"># ${bigPokemon.id}
+          </div>
+        </div>
+      <div class="openPokemonHeadIMG"> 
+        <img class="closebutton" onclick="closePokeCard()" src="img/close.png" alt="">
+      </div>
     </div>
     <div class="openPokemonClass" id="pokemonCardClass">
-
     </div>
     <div class="openPokemonCardIMG">
       <img class="arrowleft" onclick="slide(${i-1})" src="img/arrow_back.svg" alt="">
@@ -114,7 +120,6 @@ function generatePokecard(bigPokemon, fightclasstype, i) {
       <img class="arrowright" onclick="slide(${i+1})" src="img/arrow_forward.svg" alt="">
     </div>
   </div>
-
   <div class="openPokeCardBottom">
     <div class="categoryHeader">
       <p onclick="renderAboutCategory(${i})"class="category">About</p>
@@ -124,7 +129,7 @@ function generatePokecard(bigPokemon, fightclasstype, i) {
     <div class="categories" id="categories">
     </div>
   </div>
-     `;
+  `;
 }
 
 
@@ -138,39 +143,44 @@ function renderAboutCategory(i){
 }
 
 function getAboutCategory(currentPokemon,){
-  return `<div class="categoryAbout">
-  <div class="attribute">
-    <p>Height:</p>
-    <p>${(currentPokemon.height / 10).toFixed(1).replaceAll(".", ",")} m</p>
+  return `
+  <div class="categoryAbout">
+    <div class="attribute">
+      <p>Height:
+      </p>
+      <p>${(currentPokemon.height / 10).toFixed(1).replaceAll(".", ",")} m
+      </p>
+    </div>
+    <hr class="line" />
+    <div class="attribute">
+      <p>Weight:</p>
+      <p>${(currentPokemon.weight / 10).toFixed(1).replaceAll(".", ",")} kg</p>
+    </div>
+    <hr class="line" />
+    <div class="attribute">
+      <p>Abilities:</p>
+      <p id="abilities"></p>
+    </div>
+    <hr class="line" />
+    <div class="attribute">
+      <p>Base Experience
+      </p>
+      <p>${currentPokemon.base_experience}
+      </p>
+    </div>
+    <hr class="line" />
   </div>
-  <hr class="line" />
-  <div class="attribute">
-    <p>Weight:</p>
-    <p>${(currentPokemon.weight / 10).toFixed(1).replaceAll(".", ",")} kg</p>
-  </div>
-  <hr class="line" />
-  <div class="attribute">
-    <p>Abilities:</p>
-    <p id="abilities"></p>
-  </div>
-  <hr class="line" />
-  <div class="attribute">
-    <p>Base Experience</p>
-    <p>${currentPokemon.base_experience}</p>
-  </div>
-  <hr class="line" />
-</div>`;
+  `;
 }
 
 
 
 async function renderBaseStats (i){ {
-  document.getElementById('categories').classList.remove('move-div');
+    document.getElementById('categories').classList.remove('move-div');
     let currentPokemon = allPokemon[i-1];
     let category = document.getElementById("categories");
     category.innerHTML = ``;
-    category.innerHTML = `<canvas id="myChart" width="400" height="400"></canvas>`;
-
+    category.innerHTML = `<canvas class="myChart" id="myChart"></canvas>`;
 
     names = [];
     data = [];
@@ -207,7 +217,8 @@ function renderMoves(i){
   document.getElementById('categories').classList.add('move-div');
   let currentPokemon = allPokemon[i-1];
   let movesCategory = document.getElementById("categories");
-  movesCategory.innerHTML = ``;
+  movesCategory.innerHTML = `
+  <div class="moveArrowDown"> <img src="img/keyboard_double_arrow_down_FILL0_wght100_GRAD0_opsz40.svg" alt=""> </div>`;
 
   for (let n = 0; n < currentPokemon.moves.length; n++) {
     let newMoves = currentPokemon.moves[n];
@@ -216,7 +227,7 @@ function renderMoves(i){
   }
 }
 
-function getMovesCategory(newMoves, n){
+function getMovesCategory(newMoves){
   return `
   <p class="move" id="move">${newMoves.move.name}</p>`;
 }
@@ -234,6 +245,7 @@ function slide(p){
     p=0; 
   }
     slide.innerHTML = generatePokecard(currentPokemon,fightclasstype,p);
+    getType(currentPokemon, p,`pokemonCardClass`);
     renderAboutCategory(p);
 }
 

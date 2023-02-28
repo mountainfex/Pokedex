@@ -211,7 +211,24 @@ h1 {
 
 .openPokemonCardHeader {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+.openPokemonHeadcontent {
+  display: flex;
+  gap: 15px;
+}
+
+.closebutton {
+  color: #fff;
+  width: 30px;
+  height: 30px;
+}
+
+.closebutton:hover {
+  transform: scale(1.1);
+  transition: 0.1s
 }
 
 .openPokemonName {
@@ -244,10 +261,10 @@ h1 {
 }
 
 .openPokemonCardIMG {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
@@ -258,9 +275,9 @@ h1 {
 }
 
 .arrowleft {
-  position: fixed;
-  top: 30%;
-  left: 25%;
+  position: absolute;
+  top: 35%;
+  left: 0%;
   width: 30px;
 }
 
@@ -270,9 +287,9 @@ h1 {
 }
 
 .arrowright {
-  position: fixed;
-  top: 30%;
-  right: 25%;
+  position: absolute;
+  top: 35%;
+  right: 0%;
   width: 30px;
 }
 
@@ -309,6 +326,14 @@ h1 {
   color: black;
   margin-top: 20px;
   padding: 0 35px 0 35px;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
+}
+.categories::-webkit-scrollbar {
+  display: none;
+    /* Chrome */
 }
 
 .attribute {
@@ -331,45 +356,48 @@ h1 {
   margin: 16px 0 16px 0 !important;
 }
 
+.myChart{
+  display: flex !important;
+  justify-content: center !important;
+  height: 280px !important;
+  width: 280px !important;
+  margin: 0 !important;
+
+}
+
 .stats {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.progress-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-  color: var(--bs-progress-bar-color);
-  text-align: center;
-  white-space: nowrap;
-  background-color: #41b672;
-  transition: var(--bs-progress-bar-transition);
-}
-
-.bg-purple {
-  background-color: darkslateblue !important;
-}
-
-.progressbarcontent {
-  color: #000000;
-}
-
 .move-div {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   gap: 5px;
   max-height: 250px;
   overflow-y: auto;
-  padding: 0 20px 10px 20px;
-  width: 400px;
 }
 
 .move-div p {
 margin: 0;
 }
+
+.moveArrowDown{
+  width: 100%;
+  position: absolute;
+  bottom: 0%;
+  display: flex;
+  justify-content: center;
+}
+
+.moveArrowDown img {
+  width: 60px;
+  height: auto;
+}
+
 
 .move {
   flex: 1;
@@ -380,6 +408,7 @@ margin: 0;
   border-radius: 5px;
   padding: 2px 5px;
 }
+
 
 .loadersize {
   width: 100%;
@@ -450,6 +479,15 @@ margin: 0;
 .stopScroll {
   overflow: hidden !important;
 }
+
+
+
+@media (max-width: 530px) {
+  .container-fluid {
+    justify-content: center !important;
+  }
+}
+
 
 .grass {
   background-color: #56c182;
