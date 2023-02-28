@@ -126,7 +126,7 @@ function generatePokecard(bigPokemon, fightclasstype, i) {
       <p onclick="renderBaseStats(${i})" class="category">Base Stats</p>
       <p onclick="renderMoves(${i})"class="category">Moves</p>
     </div>
-    <div class="categories" id="categories">
+    <div class="categories" style="display: flex; justify-content: center;" id="categories">
     </div>
   </div>
   `;
