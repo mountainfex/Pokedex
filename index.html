@@ -25,22 +25,21 @@
             type="search"
             placeholder="Search"
             aria-label="Search"
+            onkeyup="searchPokemon()"
+            id="search"
           />
           <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
       </div>  
     </nav>
-    <section class="pokedexBackground" id="cardContent"></section>
-    <section
-      class="popUpContainer dnone"
-      id="popUpContainer"
-      onclick="closePokeCard()"
-    >
-      <div
-        class="openPokeCard"
-        id="openPokeCard"
-        onclick="doNotClose(event)"
-      ></div>
+    <section class="pokedexBackground" id="cardContent" onscroll="loadNewPokemon()"></section>
+    <section class="popUpContainer dnone" id="popUpContainer" onclick="closePokeCard()">
+      <div class="openPokeCard" id="openPokeCard" onclick="doNotClose(event)"></div>
     </section>
+    <div class="loadersize" id="loader">
+      <div class="wrapper">
+        <div class="pokeball"></div>
+      </div>
+    </div>
   </body>
 </html>

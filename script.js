@@ -1,4 +1,6 @@
 let allPokemon = [];
+let startID = 1;
+let endID = 20;
 let data = [];
 let names = [];
 
@@ -7,33 +9,38 @@ function init() {
 }
 
 async function loadPokemon() {
-  for (let i = 1; i < 21; i++) {
+  document.getElementById('loader').classList.remove('hideloader');
+  for (let i = startID; i < endID; i++) {
     let url = `https://pokeapi.co/api/v2/pokemon/${i}`;
     let response = await fetch(url);
     let currentPokemon = await response.json();
-    let fightclasstype = currentPokemon.types[0].type.name;
     allPokemon.push(currentPokemon);
-    document.getElementById("cardContent").innerHTML += generateCard(
-      fightclasstype,
-      currentPokemon,
-      i
-    );
-    getType(currentPokemon, i, `pokemonClass${i}`);
+    showPokemon(currentPokemon,i)
   }
+  document.getElementById('loader').classList.add('hideloader');
 }
 
-function generateCard(fightclasstype, currentPokemon, i) {
+function showPokemon(currentPokemon,i){
+  let id = currentPokemon.id;
+  let name = currentPokemon.name;
+  let imgURl = currentPokemon.sprites.other.dream_world.front_default
+  let fightclasstype = currentPokemon.types[0].type.name;
+  document.getElementById("cardContent").innerHTML += generateCard(fightclasstype, id, name, imgURl,i);
+  getType(currentPokemon, i, `pokemonClass${i}`);
+}
+
+function generateCard(fightclasstype, id, name, imgURl,i) {
   return `
     <div class="pokemonCard ${fightclasstype}" onclick="openPokeCard(${i})">
         <div class="pokemonCardHeader">
-          <div class="pokemonName">${currentPokemon.name}</div>
-          <div class="pokemonNumber"># ${currentPokemon.id}</div>
+          <div class="pokemonName">${name}</div>
+          <div class="pokemonNumber"># ${id}</div>
         </div>
         <div class="pokemonCardContent">
           <div class="pokemonClass" id="pokemonClass${i}">
 
           </div>
-          <img class="pokemonIMG"src="${currentPokemon.sprites.other.dream_world.front_default}" alt="" />
+          <img class="pokemonIMG"src="${imgURl}" alt="" />
         </div>
       </div>
     `;
@@ -130,7 +137,7 @@ function renderAboutCategory(i){
   renderAbilities(currentPokemon);
 }
 
-function getAboutCategory(currentPokemon,i){
+function getAboutCategory(currentPokemon,){
   return `<div class="categoryAbout">
   <div class="attribute">
     <p>Height:</p>
@@ -158,6 +165,7 @@ function getAboutCategory(currentPokemon,i){
 
 
 async function renderBaseStats (i){ {
+  document.getElementById('categories').classList.remove('move-div');
     let currentPokemon = allPokemon[i-1];
     let category = document.getElementById("categories");
     category.innerHTML = ``;
@@ -229,6 +237,28 @@ function slide(p){
     renderAboutCategory(p);
 }
 
+function searchPokemon(){
+  let search = document.getElementById("search").value;
+  search = search.toLowerCase();
+  let content = document.getElementById('cardContent');
+  content.innerHTML='';
+  for (let s = 0; s < allPokemon.length; s++) {
+    pokemon = allPokemon[s];
+    if(pokemon.name.includes(search))
+    showPokemon(pokemon,s);
+  }
+}
+
+async function loadNewPokemon() {
+  let content = document.getElementById('cardContent');
+  if (content.offsetHeight + content.scrollTop >= content.scrollHeight) {
+      content.classList.add('stopScroll');
+      startID = endID;
+      endID = endID + 20;
+      await loadPokemon();
+      content.classList.remove('stopScroll');
+  }
+}
 
 
 
