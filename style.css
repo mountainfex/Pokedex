@@ -72,6 +72,37 @@ h1 {
   height: 50px;
 }
 
+.leftHeader {
+  display: flex;
+  flex-direction: column;
+}
+
+.imprintLine {
+  font-size: 12px;
+  padding-left: 12px;
+  margin-top: -12px;
+  color: #615c5c;
+  display: flex;
+}
+
+.imprint {
+  color: #615c5c;
+}
+
+.imprint:hover {
+  color: #a8a8a8;
+  text-decoration: underline;
+}
+
+a {
+  text-decoration: none;
+}
+
+.copyright {
+  padding-left: 5px;
+}
+
+
 .btn-outline-success {
   --bs-btn-color: #e18d2f;
   --bs-btn-border-color: #e18d2f;

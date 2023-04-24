@@ -237,12 +237,12 @@ function slide(p){
   let fightclasstype = currentPokemon.types[0].type.name;
   let slide = document.getElementById('openPokeCard');
 
-  if (p < 0){
-    p = currentPokemon.length -1;
+  if (p < currentPokemon.length){
+    p = -1;
   }
 
-  if (p > currentPokemon.length-1){
-    p=0; 
+  if (p > currentPokemon.length - 1){
+    p =0; 
   }
     slide.innerHTML = generatePokecard(currentPokemon,fightclasstype,p);
     getType(currentPokemon, p,`pokemonCardClass`);
